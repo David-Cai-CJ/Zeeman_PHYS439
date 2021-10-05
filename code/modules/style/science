@@ -47,3 +47,10 @@ mathtext.fontset : dejavuserif
 
 # Use LaTeX for math formatting
 text.usetex : False
+
+# extras
+font.size : 10
+axes.titlesize: large
+axes.labelsize: large
+axes.unicode_minus: True
+legend.fontsize : medium
