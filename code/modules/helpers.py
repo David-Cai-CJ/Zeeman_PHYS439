@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import sys
 import os 
+import pickle
 
 def add_path():
     sys.path.insert(0,'/root/work/Zeeman_PHYS439/code/modules')
@@ -32,7 +33,22 @@ def convert_vb_all(col_name = 'vb', new_col_name = 'b'):
 
                     else:
                         continue
+
+def list_files(startpath):
+    for root, dirs, files in os.walk(startpath):
+        level = root.replace(startpath, '').count(os.sep)
+        indent = ' ' * 4 * (level)
+        print('{}{}/'.format(indent, os.path.basename(root)))
+        subindent = ' ' * 4 * (level + 1)
+        for f in files:
+            print('{}{}'.format(subindent, f))
                         
+def save_obj(obj, name, directory):
+    with open(directory+os.sep+ name + '.pkl', 'wb+') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+def load_obj(name,directory):
+    with open(directory+os.sep+ name + '.pkl', 'rb') as f:
+        return pickle.load(f)
 
 
-add_path()  ## This is what adds the modules folder to sys.path
